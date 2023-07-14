@@ -1,0 +1,21 @@
+name: My Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      params:
+        description: 'Parameter 1'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run script
+        run: |
+          echo "Param1: ${{ github.event.inputs.param1 }}"
+          echo "Param2: ${{ github.event.inputs.param2 }}"
+          echo "Param3: ${{ github.event.inputs.param3 }}"
