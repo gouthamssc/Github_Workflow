@@ -3,19 +3,20 @@ on:
   workflow_dispatch:
     inputs:
       params:
-        description: 'Parameter 1'
+        description: A JSON array of parameters
+        type: string
         required: true
 
 jobs:
-  build:
+  my_job:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Run script
+      - name: Get parameters
         run: |
-          echo "Param1: ${{ github.event.inputs.param1 }}"
-          echo "Param2: ${{ github.event.inputs.param2 }}"
-          echo "Param3: ${{ github.event.inputs.param3 }}"
+          echo '::set-output name=params::$(cat $GITHUB_EVENT_PAYLOAD.params | fromJson)'
+      - name: Print parameters
+        run: |
+          echo "The parameters are:"
+          for param in "${{ steps.get_parameters.outputs.params }}"; do
+            echo "${param}"
+          done

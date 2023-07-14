@@ -1,5 +1,5 @@
 curl -X POST \
-  -H "Authorization: Bearer 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" \
+  -H "Authorization: Bearer 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" \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/gouthamssc/Github_Workflow/actions/workflows/testwork.yaml/dispatches \
-  -d '{"ref": "main", "inputs": {"param1": "value1", "param2": "value2", "param3": "value3"}}'
+  -d '{ "params": [ "param1", "param2" ] }'
