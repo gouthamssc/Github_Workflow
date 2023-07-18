@@ -1,22 +1,20 @@
-name: My Workflow
+name: JSON POST Workflow
+
 on:
   workflow_dispatch:
     inputs:
-      params:
-        description: A JSON array of parameters
-        type: string
+      json_payload:
+        description: 'JSON payload'
         required: true
 
 jobs:
-  my_job:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Get parameters
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Print JSON payload
         run: |
-          echo '::set-output name=params::$(cat $GITHUB_EVENT_PAYLOAD.params | fromJson)'
-      - name: Print parameters
-        run: |
-          echo "The parameters are:"
-          for param in "${{ steps.get_parameters.outputs.params }}"; do
-            echo "${param}"
-          done
+          echo "Received JSON Payload: ${{ github.event.inputs.json_payload }}"
