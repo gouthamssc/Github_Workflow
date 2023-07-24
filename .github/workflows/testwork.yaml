@@ -16,11 +16,8 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Print JSON payload
-        env:
-          VARIABLE1: ${{ fromJson(github.event.inputs.key1) }}
         run: |
-          echo "Variable1: $VARIABLE1"   
-
+          echo ${{ fromJson(github.event.inputs.json_payload).key1 }}
 #       - name: Print old JSON payload
 #         run: |
 #           echo "Received JSON Payload: ${{ github.event.inputs.json_payload }}"  
