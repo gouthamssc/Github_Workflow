@@ -18,6 +18,4 @@ jobs:
 #         run: |
 #           echo "Received JSON Payload: ${{ github.event.inputs.json_payload }}"    
       - name: Print ServiceNow Request Data
-        env:
-          SERVICE_NOW_REQUEST: ${{ toJSON(fromJSON(github.event.inputs.json_payload).var_serviceNowRequest) }}
-        run: echo "ServiceNow Request Data: $SERVICE_NOW_REQUEST"
+        run: echo "ServiceNow Request Data: ${{ toJSON(fromJSON(github.event.inputs.json_payload).var_serviceNowRequest) }}"
