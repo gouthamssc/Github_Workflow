@@ -17,8 +17,7 @@ jobs:
         
       - name: Print JSON payload
         run: |
-          JSON= ${{ toJson(fromJson(github.event.inputs.json_payload))}}
-          echo "$JSON"
+          echo "Received JSON Payload: ${{ toJson(fromJson(github.event.inputs.json_payload)) }}"
           
 #       - name: Print old JSON payload
 #         run: |
