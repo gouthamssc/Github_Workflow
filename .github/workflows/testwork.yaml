@@ -17,7 +17,7 @@ jobs:
         
       - name: Print JSON payload
         env:
-          VARIABLE1: ${{ github.event.inputs.json_payload.VAR_GITHUB_PRIVATE_REPO }}
+          VARIABLE1: ${{ github.event.inputs.json_payload.key1 }}
         run: |
           echo "Variable1: $VARIABLE1"   
 #       - name: Print old JSON payload
