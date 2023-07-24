@@ -17,9 +17,12 @@ jobs:
         
       - name: Print JSON payload
         env:
-          VARIABLE1: ${{ fromJson(github.event.inputs.json_payload).variable1 }}
+          VARIABLE1: ${{ fromJson(github.event.inputs.json_payload) }}
+          VARIABLE2: ${{ fromJson(JSON_PAYLOAD).key2 }}
         run: |
           echo "Variable1: $VARIABLE1"   
+          echo "Variable2: $VARIABLE2"   
+
 #       - name: Print old JSON payload
 #         run: |
 #           echo "Received JSON Payload: ${{ github.event.inputs.json_payload }}"  
