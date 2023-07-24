@@ -16,6 +16,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Print JSON payload
         run: |
-          echo "Received JSON Payload: ${{ toJSON(fromJSON(github.event.inputs.json_payload).var_serviceNowRequest) }}"    
+          echo "Received JSON Payload: ${{ (github.event.inputs.json_payload).var_serviceNowRequest) }}"    
 #       - name: Print ServiceNow Request Data
 #         run: echo "ServiceNow Request Data: ${{ toJSON(fromJSON(github.event.inputs.json_payload).var_serviceNowRequest) }}"
