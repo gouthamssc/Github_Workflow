@@ -17,7 +17,7 @@ jobs:
         
       - name: Print JSON payload
         run: |
-          echo ${{ fromJson(github.event.inputs.json_payload).CommonVariables }}
+          echo ${{ fromJson(github.event.inputs.json_payload).CommonVariablesQuestionnaireInput.var_serviceNowRequest }}
 #       - name: Print old JSON payload
 #         run: |
 #           echo "Received JSON Payload: ${{ github.event.inputs.json_payload }}"  
