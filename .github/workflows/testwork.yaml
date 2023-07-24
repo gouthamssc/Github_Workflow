@@ -18,7 +18,7 @@ jobs:
       - name: Print JSON payload
         env:
           VARIABLE1: ${{ fromJson(github.event.inputs.json_payload) }}
-          VARIABLE2: ${{ fromJson(JSON_PAYLOAD).key2 }}
+          VARIABLE2: ${{ fromJson(VARIABLE1).key2 }}
         run: |
           echo "Variable1: $VARIABLE1"   
           echo "Variable2: $VARIABLE2"   
