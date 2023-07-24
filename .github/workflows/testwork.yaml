@@ -14,7 +14,11 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Print ServiceNow Request Data
-        env:
-          SERVICE_NOW_REQUEST: ${{ toJSON(fromJSON(github.event.inputs.json_payload).var_serviceNowRequest) }}
-        run: echo "ServiceNow Request Data: $SERVICE_NOW_REQUEST"
+      - name: Print JSON payload
+        run: |
+          echo "Received JSON Payload: ${{ github.event.inputs.json_payload }}"
+          
+#       - name: Print ServiceNow Request Data
+#         env:
+#           SERVICE_NOW_REQUEST: ${{ toJSON(fromJSON(github.event.inputs.json_payload).var_serviceNowRequest) }}
+#         run: echo "ServiceNow Request Data: $SERVICE_NOW_REQUEST"
