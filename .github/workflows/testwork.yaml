@@ -17,7 +17,9 @@ jobs:
         
       - name: Print JSON payload
         run: |
-          echo ${{ toJson(fromJson(github.event.inputs.json_payload).CommonVariablesQuestionnaireInput) }}
+          echo "::set-output name=matrix::${fromJson(github.event.inputs.json_payload)//'%'/'%25'}"
+          
+#         echo ${{ toJson(fromJson(github.event.inputs.json_payload).CommonVariablesQuestionnaireInput) }}
 #       - name: Print old JSON payload
 #         run: |
 #           echo "Received JSON Payload: ${{ github.event.inputs.json_payload }}"  
