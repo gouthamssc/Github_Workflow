@@ -1,6 +1,6 @@
   curl -X POST \
   -H "Accept: application/vnd.github.v3+json" \
-  -H "Authorization: Bearer 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" \
+  -H "Authorization: Bearer " \
   -H "Content-Type: application/json" \
   -d '{
     "ref": "main",
