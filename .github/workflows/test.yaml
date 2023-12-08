@@ -2,22 +2,24 @@ name: Second Workflow
 
 on:
   workflow_run:
-    workflows: ["JSON POST Workflow"]
+    workflows: ["Multiple Variable Workflow"]
     types:
       - completed
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.event.workflow_run.outputs.json_payload, '{"VAR_REGION":"Yes"}') }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.event.workflow_run.outputs.variable_a, 'goutham') }}
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Save JSON payload to file
+      - name: Save Variables to file
         run: |
-          echo "${{ github.event.workflow_run.outputs.json_payload }}" > payload.json
+          echo "Variable A: ${{ github.event.workflow_run.outputs.variable_a }}" > variables.txt
+          echo "Variable B: ${{ github.event.workflow_run.outputs.variable_b }}" >> variables.txt
+          echo "Variable C: ${{ github.event.workflow_run.outputs.variable_c }}" >> variables.txt
 
       - name: Send email
         uses: dawidd6/action-send-mail@v2
@@ -26,8 +28,12 @@ jobs:
           server_port: 465
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: JSON Payload from Workflow
+          subject: Variables from Workflow
           to: gouthamsneham@gmail.com
           from: Your Email
-          body: Attached is the JSON payload from the first workflow.
-          attachments: payload.json
+          body: |
+            Attached are the variables from the first workflow.
+            Variable A: ${{ github.event.workflow_run.outputs.variable_a }}
+            Variable B: ${{ github.event.workflow_run.outputs.variable_b }}
+            Variable C: ${{ github.event.workflow_run.outputs.variable_c }}
+          attachments: variables.txt
