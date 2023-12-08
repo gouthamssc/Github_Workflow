@@ -1,8 +1,8 @@
 name: Simple workflow
 
 on:
-  push:
-    branches: [ main ]
+  repository_dispatch:
+    types: do-something
 
 jobs:
   hello_world:
