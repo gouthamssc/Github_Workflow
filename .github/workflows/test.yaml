@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.event.workflow_run.outputs.json_payload, '"VAR_REGION":"Yes"') }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.event.workflow_run.outputs.json_payload, '{"VAR_REGION":"Yes"}') }}
 
     steps:
       - name: Check out repository
