@@ -1,0 +1,14 @@
+name: Simple workflow
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  hello_world:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Print a message
+        run: |
+          echo "Hello, world!"
