@@ -1,14 +1,22 @@
-name: Simple workflow
+name: Second Workflow
 
 on:
-  repository_dispatch:
-    types: do-something
+  workflow_run:
+    workflows: ["JSON POST Workflow"]
+    types:
+      - completed
 
 jobs:
-  hello_world:
+  build:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.event.workflow_run.outputs.json_payload, '"VAR_REGION":"Yes"') }}
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Print a message
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Get inputs
         run: |
-          echo "Hello, world!"
+          echo "Received Input A: ${{ github.event.inputs.a }}"
+          echo "Received Input B: ${{ github.event.inputs.b }}"
+          echo "Received Input C: ${{ github.event.inputs.c }}"
