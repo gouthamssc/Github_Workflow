@@ -15,6 +15,19 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Get inputs
+      - name: Save JSON payload to file
         run: |
-          echo "second workflow is triggered bcz region is yes"
+          echo "${{ github.event.workflow_run.outputs.json_payload }}" > payload.json
+
+      - name: Send email
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: JSON Payload from Workflow
+          to: gouthamsneham@gmail.com
+          from: Your Email
+          body: Attached is the JSON payload from the first workflow.
+          attachments: payload.json
