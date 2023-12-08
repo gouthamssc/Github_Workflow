@@ -1,7 +1,7 @@
 name: JSON POST Workflow
 
 on:
-  repository_dispatch:
+  workflow_dispatch:
     inputs:
       json_payload:
         description: 'JSON payload'
