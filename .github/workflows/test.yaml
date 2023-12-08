@@ -17,6 +17,4 @@ jobs:
 
       - name: Get inputs
         run: |
-          echo "Received Input A: ${{ github.event.inputs.a }}"
-          echo "Received Input B: ${{ github.event.inputs.b }}"
-          echo "Received Input C: ${{ github.event.inputs.c }}"
+          echo "second workflow is triggered bcz region is yes"
