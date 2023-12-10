@@ -32,5 +32,5 @@ jobs:
                   "variable_c": "${{ github.event.inputs.variable_c }}"
                 }
               }' \
-              "https://api.github.com/repos/gouthamssc/Github_Workflow/actions/workflows/test.yml/dispatches"
+              "https://api.github.com/repos/gouthamssc/Github_Workflow/actions/workflows/test.yaml/dispatches"
           fi
