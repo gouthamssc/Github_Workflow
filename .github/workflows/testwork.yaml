@@ -1,12 +1,27 @@
-name: Multiple Variable Workflow
+name: Print Variables Workflow
 
-on:
+on: 
   workflow_dispatch:
+    inputs:
+      variable_a:
+        description: 'Input Variable A'
+        required: true
+      variable_b:
+        description: 'Input Variable B'
+        required: true
+      variable_c:
+        description: 'Input Variable C'
+        required: true
+
 jobs:
-  hello_world:
+  print_variables:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Print a message
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Print variables
         run: |
-          echo "${{ secrets.key }}"
+          echo "Variable A: ${{ github.event.inputs.variable_a }}"
+          echo "Variable B: ${{ github.event.inputs.variable_b }}"
+          echo "Variable C: ${{ github.event.inputs.variable_c }}"
