@@ -1,39 +1,27 @@
-name: Second Workflow
+name: Triggered Workflow
 
-on:
-  workflow_run:
-    workflows: ["Multiple Variable Workflow"]
-    types:
-      - completed
+on: 
+  workflow_dispatch:
+    inputs:
+      variable_a:
+        description: 'Input Variable A'
+        required: true
+      variable_b:
+        description: 'Input Variable B'
+        required: true
+      variable_c:
+        description: 'Input Variable C'
+        required: true
 
 jobs:
-  build:
+  print_variables:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success'}}
-
     steps:
-      - name: Check out repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Save Variables to file
+      - name: Print variables
         run: |
-          echo "Variable A: ${{ github.event.workflow_run.outputs.variable_a }}" > variables.txt
-          echo "Variable B: ${{ github.event.workflow_run.outputs.variable_b }}" >> variables.txt
-          echo "Variable C: ${{ github.event.workflow_run.outputs.variable_c }}" >> variables.txt
-
-      - name: Send email
-        uses: dawidd6/action-send-mail@v2
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: Variables from Workflow
-          to: gouthamsneham@gmail.com
-          from: Your Email
-          body: |
-            Attached are the variables from the first workflow.
-            Variable A: ${{ github.event.workflow_run.outputs.variable_a }}
-            Variable B: ${{ github.event.workflow_run.outputs.variable_b }}
-            Variable C: ${{ github.event.workflow_run.outputs.variable_c }}
-          attachments: variables.txt
+          echo "Variable A: ${{ github.event.inputs.variable_a }}"
+          echo "Variable B: ${{ github.event.inputs.variable_b }}"
+          echo "Variable C: ${{ github.event.inputs.variable_c }}"
