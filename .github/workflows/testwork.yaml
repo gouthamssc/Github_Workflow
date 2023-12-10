@@ -22,6 +22,6 @@ jobs:
 
       - name: Print variables
         run: |
-          echo "Variable A: ${{ github.event.inputs.variable_a }}"
+          echo "Variable A: ${{ secrets.key }}"
           echo "Variable B: ${{ github.event.inputs.variable_b }}"
           echo "Variable C: ${{ github.event.inputs.variable_c }}"
