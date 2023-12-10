@@ -1,17 +1,36 @@
-name: Test Secrets and Env Variables
+name: Trigger Workflow
 
 on: 
   workflow_dispatch:
+    inputs:
+      variable_a:
+        description: 'Input Variable A'
+        required: true
+      variable_b:
+        description: 'Input Variable B'
+        required: true
+      variable_c:
+        description: 'Input Variable C'
+        required: true
 
 jobs:
-  test_variables:
+  trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: Print secret
-        run: echo "My secret is ${{ secrets.KEY }}"
-        
-      - name: Set environment variable
-        run: echo "MY_ENV_VAR=my_value" >> $GITHUB_ENV
-
-      - name: Print environment variable
-        run: echo "My environment variable is $MY_ENV_VAR"
+      - name: Check variable and trigger another workflow
+        run: |
+          if [[ "${{ github.event.inputs.variable_a }}" == "goutham" ]]; then
+            curl -X POST \
+              -H "Accept: application/vnd.github.v3+json" \
+              -H "Authorization: Bearer ${{ secrets.KEY }}" \
+              -H "Content-Type: application/json" \
+              -d '{
+                "ref": "main",
+                "inputs": {
+                  "variable_a": "${{ github.event.inputs.variable_a }}",
+                  "variable_b": "${{ github.event.inputs.variable_b }}",
+                  "variable_c": "${{ github.event.inputs.variable_c }}"
+                }
+              }' \
+              "https://api.github.com/repos/gouthamssc/Github_Workflow/actions/workflows/test.yml/dispatches"
+          fi
