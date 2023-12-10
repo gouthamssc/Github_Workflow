@@ -32,7 +32,7 @@ jobs:
         run: |
           curl -X POST \
             -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: Bearer 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" \
+            -H "Authorization: Bearer ${{ secrets.key }}" \
             -H "Content-Type: application/json" \
             "https://api.github.com/repos/gouthamssc/Github_Workflow/actions/workflows/test.yaml/dispatches"
             -d '{"event_type": "custom_trigger", "client_payload": {"variable_a": "${{ github.event.inputs.variable_a }}", "variable_b": "${{ github.event.inputs.variable_b }}", "variable_c": "${{ github.event.inputs.variable_c }}"}}'
