@@ -2,16 +2,6 @@ name: Multiple Variable Workflow
 
 on:
   workflow_dispatch:
-    inputs:
-      variable_a:
-        description: 'Variable A'
-        required: true
-      variable_b:
-        description: 'Variable B'
-        required: true
-      variable_c:
-        description: 'Variable C'
-        required: true
 jobs:
   hello_world:
     runs-on: ubuntu-latest
