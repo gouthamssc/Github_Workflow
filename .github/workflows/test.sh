@@ -1,11 +1,10 @@
-  curl -X POST \
-  -H "Accept: application/vnd.github.v3+json" \
-  -H "Authorization: Bearer " \
-  -H "Content-Type: application/json" \
-  -d '{
-    "ref": "main",
-    "inputs": {
-      "json_payload": "{ "params": [ "param1", "param2" ] }"
-    }
-  }' \
-  "https://api.github.com/repos/<YOUR_ORGANIZATION>/<YOUR_REPOSITORY>/actions/workflows/<YOUR_WORKFLOW_FILE>/dispatches"
+curl -X POST -H "Accept: application/vnd.github.v3+json" \
+ -H "Authorization: Bearer <PAT>" \
+ -H "Content-Type: application/json" \
+ -d '{
+"ref": "main",
+"inputs": {
+ "variable_a": "goutham", "variable_b": "b", "variable_c": "c"
+}
+}' \
+ "https://api.github.com/repos/<OWNER/ORG NAME>/<REPO NAME>/actions/workflows/<WORKFLOW_1.yaml>/dispatches"
