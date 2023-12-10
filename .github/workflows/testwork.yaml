@@ -1,27 +1,17 @@
-name: Print Variables Workflow
+name: Test Secrets and Env Variables
 
 on: 
   workflow_dispatch:
-    inputs:
-      variable_a:
-        description: 'Input Variable A'
-        required: true
-      variable_b:
-        description: 'Input Variable B'
-        required: true
-      variable_c:
-        description: 'Input Variable C'
-        required: true
 
 jobs:
-  print_variables:
+  test_variables:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Print secret
+        run: echo "My secret is ${{ secrets.KEY }}"
+        
+      - name: Set environment variable
+        run: echo "MY_ENV_VAR=my_value" >> $GITHUB_ENV
 
-      - name: Print variables
-        run: |
-          echo Variable A: "${{ env.VAR }}"
-          echo "Variable B: ${{ github.event.inputs.variable_b }}"
-          echo "Variable C: ${{ github.event.inputs.variable_c }}"
+      - name: Print environment variable
+        run: echo "My environment variable is $MY_ENV_VAR"
