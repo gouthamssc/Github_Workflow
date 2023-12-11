@@ -22,6 +22,6 @@ jobs:
 
       - name: Print variables
         run: |
-          echo "Variable A: ${{ github.event.inputs.variable_a }}"
-          echo "Variable B: ${{ github.event.inputs.variable_b }}"
-          echo "Variable C: ${{ github.event.inputs.variable_c }}"
+          echo "Variable A: ${{ github.event.inputs.variable_a }}  >> a.txt"
+          echo "Variable B: ${{ github.event.inputs.variable_b }} >> a.txt"
+          echo "Variable C: ${{ github.event.inputs.variable_c }} >> a.txt"
